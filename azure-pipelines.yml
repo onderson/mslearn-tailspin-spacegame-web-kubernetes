@@ -62,7 +62,7 @@ stages:
             inputs:
               action: createSecret
               secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: 'Container Registry Connection'
+              dockerRegistryEndpoint: tailspinspacegameacr1467.azurecr.io
               kubernetesServiceConnection: openshift-sandbox-rh-ee-osezgin-stage-1652455512372
               namespace: 'rh-ee-osezgin-stage'            
           - task: KubernetesManifest@0
