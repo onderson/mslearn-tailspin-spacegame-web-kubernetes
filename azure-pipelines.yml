@@ -24,7 +24,7 @@ stages:
         buildContext: $(Build.Repository.LocalPath)
         repository: $(webRepository)
         dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.Web/Dockerfile'
-        containerRegistry: tailspinspacegameacr1467.azurecr.io
+        containerRegistry: openshift-sb-acr
         tags: |
           $(tag)
     - task: Docker@2
@@ -34,7 +34,7 @@ stages:
         buildContext: $(Build.Repository.LocalPath)
         repository: $(leaderboardRepository)
         dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.LeaderboardContainer/Dockerfile'
-        containerRegistry: tailspinspacegameacr1467.azurecr.io
+        containerRegistry: openshift-sb-acr
         tags: |
           $(tag)
     - publish: '$(Build.SourcesDirectory)/manifests'
@@ -62,7 +62,7 @@ stages:
             inputs:
               action: createSecret
               secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: tailspinspacegameacr1467.azurecr.io
+              dockerRegistryEndpoint: openshift-sb-acr
               kubernetesServiceConnection: openshift-sandbox-rh-ee-osezgin-stage-1652455512372
               namespace: 'rh-ee-osezgin-stage'            
           - task: KubernetesManifest@0
