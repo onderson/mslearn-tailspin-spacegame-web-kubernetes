@@ -1,6 +1,9 @@
 trigger:
 - 'main'
 
+pool:
+  name: OS-test
+      
 variables:
   buildConfiguration: 'Release'
   leaderboardRepository: 'leaderboard'
@@ -15,8 +18,7 @@ stages:
   - job: 'Build'
     displayName: 'Build job'
     pool:
-      #vmImage: 'ubuntu-18.04'
-      vmImage: 'OS-test'
+      vmImage: 'ubuntu-18.04'
     steps:
     - task: Docker@2
       displayName: 'Build and push the image to container registry'
@@ -48,7 +50,7 @@ stages:
   - deployment: Deploy
     displayName: Deploy
     pool:
-      vmImage: 'OS-test'
+      vmImage: 'ubuntu-18.04'
     environment: 'openshift-sandbox.rh-ee-osezgin-stage'
     variables:
     - group: Release
